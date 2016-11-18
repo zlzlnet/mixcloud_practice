@@ -61,6 +61,16 @@ IPV6_PEERDNS="no"
 ```
 修改```/etc/resolv.conf```配置文件，删除```nameserver xxx.xxx.xxx.xxx```相关内容
 
+ipforward 开关打开
+
+```
+[root@172-16-20-169 ~]# cat /proc/sys/net/ipv4/ip_forward
+0
+[root@172-16-20-169 ~]# echo 1 > /proc/sys/net/ipv4/ip_forward
+[root@172-16-20-169 ~]# cat /proc/sys/net/ipv4/ip_forward
+1
+```
+
 ####c. security
 关闭防火墙相关服务
 
@@ -72,6 +82,17 @@ systemctl disable firewalld.service
 
 ```
 iptables -F
+```
+
+关闭Selinux
+
+```
+# 临时关闭
+setenforce 0
+
+# 修改文件关闭
+/etc/selinux/config中将SELINUX=enforcing改为SELINUX=disabled
+重启虚拟机
 ```
 
 ## <span id="ubuntu-xx">ubuntu xx</span>
