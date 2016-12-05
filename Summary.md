@@ -4,6 +4,7 @@
 * [zStack]()
 	* [1 - qcow2磁盘直接扩容方法](1-zStack/qcow2_expansion.md)
 	* [2 - 标准虚拟机镜像制作方法](1-zStack/vm_standard.md)
+	* [3 - CentOS调整root分区大小的方法](1-zStack/root_dir_adjust.md)
 
 * [openstack]()
 	* [简介](2-openstack/readme.md)
