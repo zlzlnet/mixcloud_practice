@@ -8,6 +8,8 @@
 
 **openstack network 节点搭建**
 
+本文介绍搭建openstack前的一些准备工作，包括相关配置说明、虚拟机安装注意事项、密码说明等
+
 ##环境
 
 本实践采用的环境为VMware Workstation + CentOS + OpenStack
@@ -41,6 +43,13 @@
 本实践会使用VMnet0、VMnet8、VMnet9、VMnet10、VMnet11 5个虚拟网络
 
 其中**VMnet0**为与宿主机通信的网络，默认使用，其他四个虚拟网络为openstack环境使用
+
+**注**：
+
+VMnet8虚拟网络中，NAT的网关IP需要设置成[10.0.0.2]()，因为在虚拟机环境当中，10.0.0.1的IP地址已经被宿主机使用。
+
+![vmnet8](pic/vmnet8.png)
+
 
 三台虚拟机详细地址规划如下：
 
@@ -82,6 +91,35 @@
     	<td></td>
     </tr>
 </table>  
+
+## VM 安装注意事项
+###1. CentOS 安装选择
+虚拟机安装使用最小化安(后期需要手动安装缺失的软件包)或者computer node模式即可，CPU VT-x功能开启后，VMware安装虚拟机会默认自动选择模式
+	
+###2. CPU 虚拟化功能开启
+本实践使用VMware安装虚拟机模拟真实物理机环境，因此需要将虚拟机CPU的虚拟化功能开启
+	
+![vm_cpu](pic/vm_cpu.png)
+	
+###3. 虚拟机安装完成后请修改时区为CST
+	
+```
+cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
+```
+
+###4. 修改VIM设置
+
+修改```/etc/vimrc```文件
+
+```
+#新增
+set ts=4
+set expandtab
+```
+
+##模块安装明细
+![module](pic/module.png)
+部分模块在三个节点上都要安装，例如neutron
 
 ## Passwords
 
